@@ -9,7 +9,8 @@ class ProcedureController extends Controller
 {
     public function LoginProc(Request $req)
     {
-        DB::select('call Login_Proc(?, @out)', [$req]);
+        $json = json_encode($req);
+        DB::select('call Login_Proc(?, @out)', [$json]);
         $selectResult = DB::select('SELECT @out AS result');
         dd($selectResult);
     }
