@@ -12,7 +12,7 @@ class ProcedureController extends Controller
         $email = json_encode($req->user_email);
         $passwd = json_encode($req->user_password);
 
-        //dd($email);
+        dd($email);
         $login = DB::select(
             'call Login_Proc(?,?)', [$email, $passwd]
         );
