@@ -11,7 +11,7 @@ class ProcedureController extends Controller
     {
         $out = "";
 
-        DB::select('exec testproc(?,?)', array(10, $out));
+        $out = DB::select('exec testproc(?,?)', array(10));
 
         dd($out);
     }
