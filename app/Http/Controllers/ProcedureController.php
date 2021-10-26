@@ -20,6 +20,6 @@ class ProcedureController extends Controller
             'call Login_Proc(?,?)', [$reqJson, $out]
         );
 
-        json_decode($out);
+        dd(json_decode($out));
     }
 }
