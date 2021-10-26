@@ -14,12 +14,12 @@ class ProcedureController extends Controller
 
         $out = "";
 
-        $reqJson = json_decode($req);
+        $reqJson = json_encode($req);
 
         $login = DB::select(
             'call Login_Proc(?,?)', [$reqJson, $out]
         );
 
-        dd($out);
+        json_decode($out);
     }
 }
