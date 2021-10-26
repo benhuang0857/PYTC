@@ -10,7 +10,7 @@ class ProcedureController extends Controller
     public function LoginProc(Request $req)
     {
         //$out = "";
-        $out = DB::select('call testproc(?)', [10]);
+        $out = DB::select('call testproc(?, @out)', [10]);
         dd($out);
     }
 }
