@@ -11,6 +11,8 @@ class ProcedureController extends Controller
     {
         $email = $req->user_email;
         $passwd = $req->user_password;
+
+        dd($email);
         $login = DB::select(
             'call Login_Proc(?,?)', [$email, $passwd]
         );
