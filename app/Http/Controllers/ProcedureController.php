@@ -9,8 +9,8 @@ class ProcedureController extends Controller
 {
     public function LoginProc(Request $req)
     {
-        $out = "";
-        $out = DB::select('call testproc(?, @outint)', [ 10 ]);
+        //$out = "";
+        $out = DB::select('call testproc(?)', [10]);
         dd($out);
     }
 }
