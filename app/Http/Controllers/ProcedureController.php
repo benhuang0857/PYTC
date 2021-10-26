@@ -14,8 +14,10 @@ class ProcedureController extends Controller
 
         $out = "";
 
+        $reqJson = json_decode($req);
+
         $login = DB::select(
-            'call Login_Proc(?,?)', [$req, $out]
+            'call Login_Proc(?,?)', [$reqJson, $out]
         );
 
         dd($out);
