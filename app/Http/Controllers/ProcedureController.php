@@ -10,6 +10,9 @@ class ProcedureController extends Controller
     #Mysql Call Proc Login_Proc
     public function LoginProc(Request $req)
     {
+
+        dd($req);
+
         $email = $req->eamil;
         $password = $req->password;
         $json = 'json_object("email",'.$email.',"password",'.$password.')';
