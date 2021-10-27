@@ -14,11 +14,11 @@ class ProcedureController extends Controller
         // $reqObj = json_encode($req);
         // dd($reqObj->eamil);
 
-        $email = $req->eamil;
+        $email = $req->email;
         $password = $req->password;
         $json = 'json_object("email","'.$email.'","password","'.$password.'")';
 
-        dd($json);
+        //dd($json);
         DB::select('call Login_Proc('.$json.', @out)');
         $selectResult = DB::select('SELECT @out AS result');
         return $selectResult;
