@@ -11,8 +11,8 @@ class ProcedureController extends Controller
     public function LoginProc(Request $req)
     {
 
-        $reqObj = json_encode($req);
-        dd($reqObj->eamil);
+        // $reqObj = json_encode($req);
+        // dd($reqObj->eamil);
 
         $email = $req->eamil;
         $password = $req->password;
