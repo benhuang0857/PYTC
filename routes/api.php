@@ -18,7 +18,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 //請在URL加上api/{route_name}這樣才有辦法calling下方API
-Route::get('login', 'ProcedureController@LoginProc');
+Route::post('login', 'ProcedureController@LoginProc');
 Route::get('list/insert', 'ProcedureController@ListInsertProc');
 Route::get('list/select', 'ProcedureController@ListSelectProc');
 Route::get('user/insert', 'ProcedureController@UserInsertProc');
