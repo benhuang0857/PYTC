@@ -10,8 +10,9 @@ class ProcedureController extends Controller
     #Mysql Call Proc Login_Proc
     public function LoginProc(Request $req)
     {
-        $json = json_encode($req);
-        DB::select('call Login_Proc(json_object("email","test4","password","test"), @out)', [$json]);
+        //$json = json_encode($req);
+        $json = 'json_object("email","test4","password","test")';
+        DB::select('call Login_Proc(?, @out)', [$json]);
         $selectResult = DB::select('SELECT @out AS result');
         return $selectResult;
     }
