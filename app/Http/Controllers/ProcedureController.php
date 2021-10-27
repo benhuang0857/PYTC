@@ -12,7 +12,7 @@ class ProcedureController extends Controller
     {
 
         $reqObj = json_encode($req);
-        dd($reqObj['eamil']);
+        dd($reqObj->eamil);
 
         $email = $req->eamil;
         $password = $req->password;
