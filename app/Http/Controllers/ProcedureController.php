@@ -21,7 +21,7 @@ class ProcedureController extends Controller
         // str_replace(']','', $selectResult);
 
         $j = json_encode($selectResult[0]->result);
-        return json_decode($j);
+        return json_decode($j)->status;
     }
 
     #Mysql Call Proc List_Insert_Proc
