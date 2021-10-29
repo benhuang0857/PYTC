@@ -69,7 +69,7 @@ class ProcedureController extends Controller
         $selectResult = DB::select('SELECT @out AS result');
 
         $jObj = json_decode($selectResult[0]->result);
-        if($jObj->status == 'Y')
+        if($jObj != null)
         {
             return json_encode(
                 array(
