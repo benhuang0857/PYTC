@@ -72,9 +72,7 @@ class ProcedureController extends Controller
         if($jObj != null)
         {
             return json_encode(
-                array(
-                    $jObj
-                )
+                $jObj
             );
         }
         else
