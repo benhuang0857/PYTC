@@ -50,8 +50,6 @@ class ProcedureController extends Controller
         $upd_user = $req->upd_user;
         $json = 'json_object("gid","'.$gid.'","gname","'.$gname.'","mid","'.$mid.'","id","'.$id.'","item_no","'.$item_no.'","item_name","'.$item_name.'","upd_user","'.$upd_user.'")';
 
-        dd($json);
-
         DB::select('call List_Insert_Proc('.$json.', @out)');
         $selectResult = DB::select('SELECT @out AS result');
 
