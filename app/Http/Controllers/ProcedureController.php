@@ -18,7 +18,8 @@ class ProcedureController extends Controller
         $selectResult = DB::select('SELECT @out AS result');
 
         $j = json_encode($selectResult[0]->result);
-        return json_decode($j);
+        var_dump(json_decode($j));
+        //return json_decode($j);
     }
 
     #Mysql Call Proc List_Insert_Proc
