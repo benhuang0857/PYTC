@@ -30,11 +30,8 @@ class ProcedureController extends Controller
         }
         else
         {
-            return json_encode(
-                array(
-                    'status' => 404
-                )
-            );
+            return response(json_encode(['error' => 'Not found.']), 404)
+                            ->header('Content-Type', 'application/json');
         }
     }
 
