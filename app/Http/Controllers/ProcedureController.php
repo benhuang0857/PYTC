@@ -85,13 +85,13 @@ class ProcedureController extends Controller
         }
     }
 
-    #Mysql Call Proc User_Insert_Proc
+    #Mysql Call Proc User_Insert_Proc 有異常
     public function UserInsertProc(Request $req)
     {
         $name = $req->name;
         $email = $req->email;
         $password = $req->password;
-        $position = json_encode($req->position);
+        $position = $req->position; //有異常
         $upd_user = $req->upd_user;
         $json = 'json_object("name","'.$name.'","email","'.$email.'","password","'.$password.'","position","'.$position.'","upd_user","'.$upd_user.'")';
 
@@ -118,10 +118,32 @@ class ProcedureController extends Controller
     #Mysql Call Proc User_Select_Proc
     public function UserSelectProc(Request $req)
     {
-        $json = json_encode($req);
-        DB::select('call User_Select_Proc(?, @out)', [$json]);
+        $func = $req->func;
+        $id = $req->id;
+        $keyword = $req->keyword;
+        $position_unit = $req->position_unit;
+        $position_area = $req->position_area;
+        $enable = $req->enable;
+        $json = 'json_object("func","'.$func.'","id","'.$id.'","keyword","'.$keyword.'","position_unit","'.$position_unit.'","position_area","'.$position_area.'","enable","'.$enable.'")';
+
+        DB::select('call User_Select_Proc('.$json.', @out)');
         $selectResult = DB::select('SELECT @out AS result');
-        return $selectResult;
+
+        $jObj = json_decode($selectResult[0]->result);
+        if($jObj != null)
+        {
+            return json_encode(
+                $jObj
+            );
+        }
+        else
+        {
+            return response(json_encode(
+                array(
+                    //'errorMsg' => 'User Not Found'
+                )
+            ), 404)->header('Content-Type', 'application/json');
+        }
     }
 
     #Mysql Call Proc User_Update_Proc

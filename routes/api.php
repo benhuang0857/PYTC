@@ -22,5 +22,5 @@ Route::post('login', 'ProcedureController@LoginProc')->middleware('cors');
 Route::post('list/insert', 'ProcedureController@ListInsertProc')->middleware('cors');
 Route::post('list/select', 'ProcedureController@ListSelectProc')->middleware('cors');
 Route::post('user/insert', 'ProcedureController@UserInsertProc')->middleware('cors');
-Route::get('user/select', 'ProcedureController@UserSelectProc')->middleware('cors');
+Route::post('user/select', 'ProcedureController@UserSelectProc')->middleware('cors');
 Route::get('user/update', 'ProcedureController@UserUpdateProc')->middleware('cors');
