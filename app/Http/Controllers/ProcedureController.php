@@ -20,7 +20,13 @@ class ProcedureController extends Controller
         $jObj = json_decode($selectResult[0]->result);
         if($jObj->status == 'Y')
         {
-            return json_encode([$jObj->id, $jObj->status]);
+            return json_encode(
+                array(
+                    'id' => $jObj->id,
+                    'email' => $email,
+                    'status' => $jObj->status
+                )
+            );
         }
         // else
         // {
