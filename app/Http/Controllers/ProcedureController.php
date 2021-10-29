@@ -88,10 +88,31 @@ class ProcedureController extends Controller
     #Mysql Call Proc User_Insert_Proc
     public function UserInsertProc(Request $req)
     {
-        $json = json_encode($req);
-        DB::select('call User_Insert_Proc(?, @out)', [$json]);
+        $name = $req->name;
+        $email = $req->email;
+        $password = $req->password;
+        $position = $req->position;
+        $upd_user = $req->upd_user;
+        $json = 'json_object("name","'.$name.'","email","'.$email.'","password","'.$password.'","position","'.$position.'","upd_user","'.$upd_user.'")';
+
+        DB::select('call User_Insert_Proc('.$json.', @out)');
         $selectResult = DB::select('SELECT @out AS result');
-        return $selectResult;
+
+        $jObj = json_decode($selectResult[0]->result);
+        if($jObj != null)
+        {
+            return json_encode(
+                $jObj
+            );
+        }
+        else
+        {
+            return response(json_encode(
+                array(
+                    //'errorMsg' => 'User Not Found'
+                )
+            ), 404)->header('Content-Type', 'application/json');
+        }
     }
 
     #Mysql Call Proc User_Select_Proc
