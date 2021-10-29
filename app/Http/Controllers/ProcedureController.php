@@ -41,9 +41,18 @@ class ProcedureController extends Controller
     #Mysql Call Proc List_Insert_Proc
     public function ListInsertProc(Request $req)
     {
-        $json = json_encode($req);
-        DB::select('call List_Insert_Proc(?, @out)', [$json]);
+        $gid = $req->gid;
+        $gname = $req->gname;
+        $mid = $req->mid;
+        $id = $req->id;
+        $item_no = $req->item_no;
+        $item_name = $req->item_name;
+        $upd_user = $req->upd_user;
+        $json = 'json_object("gid","'.$gid.'","gname","'.$gname.'","mid","'.$mid.'","id","'.$id.'","item_no","'.$item_no.'","item_name","'.$item_name.'","upd_user","'.$upd_user.'")';
+
+        DB::select('call List_Insert_Proc('.$json.', @out)');
         $selectResult = DB::select('SELECT @out AS result');
+
         return $selectResult;
     }
 
