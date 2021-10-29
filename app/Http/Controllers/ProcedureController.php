@@ -68,7 +68,23 @@ class ProcedureController extends Controller
         DB::select('call List_Select_Proc('.$json.', @out)');
         $selectResult = DB::select('SELECT @out AS result');
 
-        dd($selectResult);
+        $jObj = json_decode($selectResult[0]->result);
+        if($jObj->status == 'Y')
+        {
+            return json_encode(
+                array(
+                    $jObj
+                )
+            );
+        }
+        else
+        {
+            return response(json_encode(
+                array(
+                    //'errorMsg' => 'User Not Found'
+                )
+            ), 404)->header('Content-Type', 'application/json');
+        }
     }
 
     #Mysql Call Proc User_Insert_Proc
