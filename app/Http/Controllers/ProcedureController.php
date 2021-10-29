@@ -18,7 +18,7 @@ class ProcedureController extends Controller
         $selectResult = DB::select('SELECT @out AS result');
 
         $j = json_encode($selectResult[0]->result);
-        dd($selectResult[0]->result);
+        return $selectResult[0]->result;
         //return json_decode($j);
     }
 
