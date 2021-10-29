@@ -53,7 +53,8 @@ class ProcedureController extends Controller
         DB::select('call List_Insert_Proc('.$json.', @out)');
         $selectResult = DB::select('SELECT @out AS result');
 
-        return $selectResult;
+        dd($selectResult);
+        //return $selectResult;
     }
 
     #Mysql Call Proc List_Select_Proc
