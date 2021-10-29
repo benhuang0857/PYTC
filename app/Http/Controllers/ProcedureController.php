@@ -28,10 +28,14 @@ class ProcedureController extends Controller
                 )
             );
         }
-        // else
-        // {
-
-        // }
+        else
+        {
+            return json_encode(
+                array(
+                    'status' => 404
+                )
+            );
+        }
     }
 
     #Mysql Call Proc List_Insert_Proc
