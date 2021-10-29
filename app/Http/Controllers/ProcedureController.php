@@ -20,7 +20,7 @@ class ProcedureController extends Controller
         // str_replace('[','', $selectResult);
         // str_replace(']','', $selectResult);
 
-        dd($selectResult[0]);
+        return json_encode($selectResult[0]);
     }
 
     #Mysql Call Proc List_Insert_Proc
