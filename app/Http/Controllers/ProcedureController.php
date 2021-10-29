@@ -30,8 +30,11 @@ class ProcedureController extends Controller
         }
         else
         {
-            return response(json_encode(['error' => 'Not found.']), 404)
-                            ->header('Content-Type', 'application/json');
+            return response(json_encode(
+                array(
+                    'errorMsg' => 'User Not Found'
+                )
+            ), 404)->header('Content-Type', 'application/json');
         }
     }
 
