@@ -91,7 +91,7 @@ class ProcedureController extends Controller
         $name = $req->name;
         $email = $req->email;
         $password = $req->password;
-        $position = $req->position;
+        $position = json_encode($req->position);
         $upd_user = $req->upd_user;
         $json = 'json_object("name","'.$name.'","email","'.$email.'","password","'.$password.'","position","'.$position.'","upd_user","'.$upd_user.'")';
 
