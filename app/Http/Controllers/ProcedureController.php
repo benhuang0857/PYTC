@@ -16,7 +16,11 @@ class ProcedureController extends Controller
 
         DB::select('call Login_Proc('.$json.', @out)');
         $selectResult = DB::select('SELECT @out AS result');
-        dd(json_encode($selectResult));
+        
+        str_replace('[','', $selectResult);
+        str_replace(']','', $selectResult);
+
+        dd($selectResult);
     }
 
     #Mysql Call Proc List_Insert_Proc
