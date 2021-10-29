@@ -32,7 +32,7 @@ class ProcedureController extends Controller
         {
             return response(json_encode(
                 array(
-                    'errorMsg' => 'User Not Found'
+                    //'errorMsg' => 'User Not Found'
                 )
             ), 404)->header('Content-Type', 'application/json');
         }
