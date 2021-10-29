@@ -38,7 +38,7 @@ class ProcedureController extends Controller
         }
     }
 
-    #Mysql Call Proc List_Insert_Proc
+    #Mysql Call Proc List_Insert_Proc 開發中
     public function ListInsertProc(Request $req)
     {
         $gid = $req->gid;
@@ -60,10 +60,15 @@ class ProcedureController extends Controller
     #Mysql Call Proc List_Select_Proc
     public function ListSelectProc(Request $req)
     {
-        $json = json_encode($req);
-        DB::select('call List_Select_Proc(?, @out)', [$json]);
+        $func = $req->func;
+        $gid = $req->gid;
+        $mid = $req->mid;
+        $json = 'json_object("func","'.$func.'","gid","'.$gid.'","mid","'.$mid.'")';
+
+        DB::select('call List_Select_Proc('.$json.', @out)');
         $selectResult = DB::select('SELECT @out AS result');
-        return $selectResult;
+
+        dd($selectResult);
     }
 
     #Mysql Call Proc User_Insert_Proc
