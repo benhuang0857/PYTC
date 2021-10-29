@@ -149,6 +149,34 @@ class ProcedureController extends Controller
     #Mysql Call Proc User_Update_Proc
     public function UserUpdateProc(Request $req)
     {
+        $id = $req->id;
+        $name = $req->name;
+        $email = $req->email;
+        $password = $req->password;
+        $position = $req->position;
+        $enable_cd = $req->enable_cd;
+        $upd_user = $req->upd_user;
+        $json = 'json_object("id","'.$id.'","name","'.$name.'","email","'.$email.'","password","'.$password.'","position","'.$position.'","enable_cd","'.$enable_cd.'","upd_user","'.$upd_user.'")';
+
+        DB::select('call User_Select_Proc('.$json.', @out)');
+        $selectResult = DB::select('SELECT @out AS result');
+
+        $jObj = json_decode($selectResult[0]->result);
+        if($jObj != null)
+        {
+            return json_encode(
+                $jObj
+            );
+        }
+        else
+        {
+            return response(json_encode(
+                array(
+                    //'errorMsg' => 'User Not Found'
+                )
+            ), 404)->header('Content-Type', 'application/json');
+        }
+
         $json = json_encode($req);
         DB::select('call User_Update_Proc(?, @out)', [$json]);
         $selectResult = DB::select('SELECT @out AS result');
