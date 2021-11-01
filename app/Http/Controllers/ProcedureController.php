@@ -25,7 +25,8 @@ class ProcedureController extends Controller
                     'id' => $jObj->id,
                     'email' => $email,
                     'status' => $jObj->status
-                )
+                ),
+                JSON_UNESCAPED_UNICODE
             );
         }
         else
@@ -72,7 +73,7 @@ class ProcedureController extends Controller
         if($jObj != null)
         {
             return json_encode(
-                $jObj
+                $jObj, JSON_UNESCAPED_UNICODE
             );
         }
         else
@@ -133,7 +134,7 @@ class ProcedureController extends Controller
         if($jObj != null)
         {
             return json_encode(
-                $jObj
+                $jObj, JSON_UNESCAPED_UNICODE
             );
         }
         else
@@ -165,7 +166,7 @@ class ProcedureController extends Controller
         if($jObj != null)
         {
             return json_encode(
-                $jObj
+                $jObj, JSON_UNESCAPED_UNICODE
             );
         }
         else
