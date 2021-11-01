@@ -103,9 +103,7 @@ class ProcedureController extends Controller
         $jObj = json_decode($selectResult[0]->result);
         if($jObj != null)
         {
-            return json_encode(
-                $jObj
-            );
+            return json_encode($jObj, JSON_UNESCAPED_UNICODE);
         }
         else
         {
