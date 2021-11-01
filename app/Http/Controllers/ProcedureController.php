@@ -48,7 +48,8 @@ class ProcedureController extends Controller
         $item_no = $req->item_no;
         $item_name = $req->item_name;
         $upd_user = $req->upd_user;
-        $json = 'json_object("gid","'.$gid.'","gname","'.$gname.'","mid","'.$mid.'","id","'.$id.'","item_no","'.$item_no.'","item_name","'.$item_name.'","upd_user","'.$upd_user.'")';
+        //$json = 'json_object("gid","'.$gid.'","gname","'.$gname.'","mid","'.$mid.'","id","'.$id.'","item_no","'.$item_no.'","item_name","'.$item_name.'","upd_user","'.$upd_user.'")';
+        $json = 'JSON_OBJECT("name","Janee","email","Janeee@pyct.com","password","test","position",JSON_ARRAY(JSON_OBJECT("area",1,"unit",2),JSON_OBJECT("area",1,"unit",3)))';
 
         DB::select('call List_Insert_Proc('.$json.', @out)');
         $selectResult = DB::select('SELECT @out AS result');
@@ -158,7 +159,7 @@ class ProcedureController extends Controller
         $upd_user = $req->upd_user;
         $json = 'json_object("id","'.$id.'","name","'.$name.'","email","'.$email.'","password","'.$password.'","position","'.$position.'","enable_cd","'.$enable_cd.'","upd_user","'.$upd_user.'")';
 
-        DB::select('call User_Select_Proc('.$json.', @out)');
+        DB::select('call User_Update_Proc('.$json.', @out)');
         $selectResult = DB::select('SELECT @out AS result');
 
         $jObj = json_decode($selectResult[0]->result);
@@ -176,10 +177,5 @@ class ProcedureController extends Controller
                 )
             ), 404)->header('Content-Type', 'application/json');
         }
-
-        $json = json_encode($req);
-        DB::select('call User_Update_Proc(?, @out)', [$json]);
-        $selectResult = DB::select('SELECT @out AS result');
-        return $selectResult;
     }
 }
