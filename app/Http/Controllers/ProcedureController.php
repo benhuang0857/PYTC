@@ -13,7 +13,7 @@ class ProcedureController extends Controller
         $id         = $req->email;
         $password   = $req->password;
 
-        $queries = DB::select("SELECT Login_Func($id, $password);");
+        $queries = DB::select("Login_Func($id, $password);");
 
         dd($queries);
     }
