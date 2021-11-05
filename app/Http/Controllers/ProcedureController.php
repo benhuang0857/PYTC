@@ -18,7 +18,7 @@ class ProcedureController extends Controller
             $user = User::where('id', $id)->where('password', $password)->firstOrFail();
             return json_encode(
                 array(
-                    'email' => $user->email,
+                    'email' => $user->id,
                     'status' => $user->isEnable
                 ), JSON_UNESCAPED_UNICODE);
         } catch (\Throwable $th) {
