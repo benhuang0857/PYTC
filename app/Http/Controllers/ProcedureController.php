@@ -15,10 +15,12 @@ class ProcedureController extends Controller
         $password   = $req->password;
 
         try {
-
             $user = User::where('id', $id)->where('password', $password)->firstOrFail();
-            return json_encode($user, JSON_UNESCAPED_UNICODE);
-
+            return json_encode(
+                array(
+                    'email' => $user->email,
+                    'status' => $user->isEnable
+                ), JSON_UNESCAPED_UNICODE);
         } catch (\Throwable $th) {
             
             return response(json_encode(
