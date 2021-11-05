@@ -14,9 +14,9 @@ class ProcedureController extends Controller
         $id         = $req->email;
         $password   = $req->password;
 
-        User::where('id', $id)->where('password', $password)->firstOrFail();
+        $user = User::where('id', $id)->where('password', $password)->firstOrFail();
 
-        dd($queries);
+        dd($user);
     }
 
     #Mysql Call Proc List_Insert_Proc 開發中
