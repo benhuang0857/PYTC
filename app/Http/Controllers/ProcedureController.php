@@ -16,26 +16,6 @@ class ProcedureController extends Controller
         $queries = DB::select("SELECT Login_Func($id, $password);");
 
         dd($queries);
-
-        // if($jObj->status == 'Y')
-        // {
-        //     return json_encode(
-        //         array(
-        //             'id' => $jObj->id,
-        //             'email' => $email,
-        //             'status' => $jObj->status
-        //         ),
-        //         JSON_UNESCAPED_UNICODE
-        //     );
-        // }
-        // else
-        // {
-        //     return response(json_encode(
-        //         array(
-        //             //'errorMsg' => 'User Not Found'
-        //         )
-        //     ), 404)->header('Content-Type', 'application/json');
-        // }
     }
 
     #Mysql Call Proc List_Insert_Proc 開發中
