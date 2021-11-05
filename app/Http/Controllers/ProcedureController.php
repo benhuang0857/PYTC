@@ -13,9 +13,11 @@ class ProcedureController extends Controller
         $id         = $req->email;
         $password   = $req->password;
 
-        $queries = DB::select("Login_Func($id, $password);");
+        dd($id);
 
-        dd($queries);
+        $queries = DB::select("Login_Func($id, $password)");
+
+        
     }
 
     #Mysql Call Proc List_Insert_Proc 開發中
