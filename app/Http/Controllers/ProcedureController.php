@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\User;
 use DB;
 
 class ProcedureController extends Controller
@@ -13,10 +14,8 @@ class ProcedureController extends Controller
         $id         = $req->email;
         $password   = $req->password;
 
+        User::where('id', $id)->where('password', $password)->firstOrFail();
 
-        $queries = DB::raw("Login_Func($id, $password)")->first();
-
-        
         dd($queries);
     }
 
