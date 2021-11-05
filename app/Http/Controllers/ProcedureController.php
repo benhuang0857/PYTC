@@ -19,7 +19,7 @@ class ProcedureController extends Controller
             //dd($user);
             return json_encode(
                 array(
-                    'email' => $user->id,
+                    'email' => $id,
                     'status' => $user->isEnable
                 ), JSON_UNESCAPED_UNICODE);
         } catch (\Throwable $th) {
