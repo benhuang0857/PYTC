@@ -16,7 +16,7 @@ class ProcedureController extends Controller
 
         try {
             $user = User::where('id', $id)->where('password', $password)->firstOrFail();
-            dd($user);
+            //dd($user);
             return json_encode(
                 array(
                     'email' => $user->id,
