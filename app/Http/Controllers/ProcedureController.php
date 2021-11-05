@@ -14,9 +14,19 @@ class ProcedureController extends Controller
         $id         = $req->email;
         $password   = $req->password;
 
-        $user = User::where('id', $id)->where('password', $password)->firstOrFail();
+        try {
 
-        dd($user);
+            $user = User::where('id', $id)->where('password', $password)->firstOrFail();
+            return json_encode($user, JSON_UNESCAPED_UNICODE);
+
+        } catch (\Throwable $th) {
+            
+            return response(json_encode(
+                array(
+                    //'errorMsg' => 'User Not Found'
+                )
+            ), 404)->header('Content-Type', 'application/json');
+        }
     }
 
     #Mysql Call Proc List_Insert_Proc 開發中
