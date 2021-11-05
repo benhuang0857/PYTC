@@ -14,7 +14,7 @@ class ProcedureController extends Controller
         $password   = $req->password;
 
 
-        $queries = DB::select("Login_Func($id, $password)");
+        $queries = DB::select("Login_Func(@id, @password)", [$id, $password]);
 
         
         dd($queries);
