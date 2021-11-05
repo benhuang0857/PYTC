@@ -10,33 +10,32 @@ class ProcedureController extends Controller
     #Mysql Call Proc Login_Proc
     public function LoginProc(Request $req)
     {
-        $email = $req->email;
-        $password = $req->password;
-        $json = 'json_object("email","'.$email.'","password","'.$password.'")';
+        $id         = $req->email;
+        $password   = $req->password;
 
-        DB::select('call Login_Proc('.$json.', @out)');
-        $selectResult = DB::select('SELECT @out AS result');
+        $queries = DB::select("SELECT Login_Func($id, $password);");
 
-        $jObj = json_decode($selectResult[0]->result);
-        if($jObj->status == 'Y')
-        {
-            return json_encode(
-                array(
-                    'id' => $jObj->id,
-                    'email' => $email,
-                    'status' => $jObj->status
-                ),
-                JSON_UNESCAPED_UNICODE
-            );
-        }
-        else
-        {
-            return response(json_encode(
-                array(
-                    //'errorMsg' => 'User Not Found'
-                )
-            ), 404)->header('Content-Type', 'application/json');
-        }
+        dd($queries);
+
+        // if($jObj->status == 'Y')
+        // {
+        //     return json_encode(
+        //         array(
+        //             'id' => $jObj->id,
+        //             'email' => $email,
+        //             'status' => $jObj->status
+        //         ),
+        //         JSON_UNESCAPED_UNICODE
+        //     );
+        // }
+        // else
+        // {
+        //     return response(json_encode(
+        //         array(
+        //             //'errorMsg' => 'User Not Found'
+        //         )
+        //     ), 404)->header('Content-Type', 'application/json');
+        // }
     }
 
     #Mysql Call Proc List_Insert_Proc 開發中
