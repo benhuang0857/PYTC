@@ -14,7 +14,7 @@ class ProcedureController extends Controller
         $id         = $req->email;
         $password   = $req->password;
 
-        $q = DB::select('SELECT Login_Func("'.$id.'", "'.$password.'")');
+        $q = DB::select('SELECT Login_Func("'.$id.'", "'.$password.'") as Result from dual');
         dd($q);
         // try {
         //     $user = User::where('id', $id)->where('password', $password)->firstOrFail();
