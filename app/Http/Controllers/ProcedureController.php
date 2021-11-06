@@ -14,27 +14,22 @@ class ProcedureController extends Controller
         $id         = $req->email;
         $password   = $req->password;
 
-        $q = DB::select('SELECT Login_Func("'.$id.'", "'.$password.'") as Result from dual');
-        
-        dd( json_decode($q[0]->Result) );
-
-        //dd(json_decode( $q[0] ));
-        // try {
-        //     $user = User::where('id', $id)->where('password', $password)->firstOrFail();
-        //     //dd($user);
-        //     return json_encode(
-        //         array(
-        //             'email' => $id,
-        //             'status' => $user->isEnable
-        //         ), JSON_UNESCAPED_UNICODE);
-        // } catch (\Throwable $th) {
+        try {
+            $user = User::where('id', $id)->where('password', $password)->firstOrFail();
+            //dd($user);
+            return json_encode(
+                array(
+                    'email' => $id,
+                    'status' => $user->isEnable
+                ), JSON_UNESCAPED_UNICODE);
+        } catch (\Throwable $th) {
             
-        //     return response(json_encode(
-        //         array(
-        //             //'errorMsg' => 'User Not Found'
-        //         )
-        //     ), 404)->header('Content-Type', 'application/json');
-        // }
+            return response(json_encode(
+                array(
+                    //'errorMsg' => 'User Not Found'
+                )
+            ), 404)->header('Content-Type', 'application/json');
+        }
     }
 
     #Mysql Call Proc List_Insert_Proc 開發中
