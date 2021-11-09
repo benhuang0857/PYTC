@@ -49,10 +49,10 @@ class ProcedureController extends Controller
 
         try
         {
-            $user = new User();
+            $user = new User;
             $user->id           = $id;
             $user->password     = $password;
-            $user->name         = $password;
+            $user->name         = $name;
             $user->upd_user     = $upd_user;
             $user->isEnable     = $isEnable;
             $user->isCfm        = $isCfm;
