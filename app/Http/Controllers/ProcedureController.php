@@ -60,7 +60,7 @@ class ProcedureController extends Controller
 
             return response(200)->header('Content-Type', 'application/json');
         } catch (\Throwable $th) {
-            return response(404)->header('Content-Type', 'application/json');
+            return response(json_encode($th), 404)->header('Content-Type', 'application/json');
         }
     }
 
