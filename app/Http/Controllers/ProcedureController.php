@@ -42,8 +42,8 @@ class ProcedureController extends Controller
         $upd_user   = $req->upd_user;
         $isEnable   = 'N';
         $isCfm      = 'N';
-        $upd_date   = '20211102';
-        $upd_time   = '220000';
+        $upd_date   = date("Ymd");
+        $upd_time   = date("His");
 
         try
         {
@@ -56,6 +56,7 @@ class ProcedureController extends Controller
             $user->isCfm        = $isCfm;
             $user->upd_date     = $upd_date;
             $user->upd_time     = $upd_time;
+            $user->save();
 
             return response(json_encode(
                 array(
