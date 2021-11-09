@@ -44,6 +44,8 @@ class ProcedureController extends Controller
 
             $PositionTmp = new PositionTmp;
             $PositionTmp->id           = $req->email;
+            $PositionTmp->unit         = '0';
+            $PositionTmp->area         = '0';
             $PositionTmp->upd_user     = $req->upd_user;
             $PositionTmp->upd_date     = $now->format('Ymd');
             $PositionTmp->upd_time     = $now->format('His');
