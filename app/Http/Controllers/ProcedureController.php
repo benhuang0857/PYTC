@@ -36,26 +36,17 @@ class ProcedureController extends Controller
     #Mysql Call Proc User_Insert_Proc
     public function UserInsertProc(Request $req)
     {
-        $id         = $req->email;
-        $password   = $req->password;
-        $name       = $req->name;
-        $upd_user   = $req->upd_user;
-        // $isEnable   = 'N';
-        // $isCfm      = 'N';
-        $upd_date   = '20211102';
-        $upd_time   = '220000';
-
         try
         {
             $user = new UserTmp;
-            $user->id           = $id;
-            $user->password     = $password;
-            $user->name         = $name;
-            $user->upd_user     = $upd_user;
-            // $user->isEnable     = $isEnable;
-            // $user->isCfm        = $isCfm;
-            $user->upd_date     = $upd_date;
-            $user->upd_time     = $upd_time;
+            $user->id           = $req->id;
+            $user->password     = $req->password;
+            $user->name         = $req->name;
+            $user->upd_user     = $req->upd_user;
+            // $user->isEnable     = $req->isEnable;
+            // $user->isCfm        = $req->isCfm;
+            $user->upd_date     = $req->upd_date;
+            $user->upd_time     = $req->upd_time;
             $user->save();
 
             return response(json_encode(
