@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use App\UserTmp;
+use App\PositionTmp;
 use DB;
+use DateTime;
 
 class ProcedureController extends Controller
 {
@@ -18,7 +20,6 @@ class ProcedureController extends Controller
         try
         {
             $user = User::where('id', $id)->where('password', $password)->firstOrFail();
-            //dd($user);
             return json_encode(
                 array(
                     'email' => $id,
@@ -39,27 +40,27 @@ class ProcedureController extends Controller
     {
         try
         {
-            $user = new UserTmp;
-            $user->id           = $req->email;
-            $user->password     = $req->password;
-            $user->name         = $req->name;
-            $user->upd_user     = $req->upd_user;
-            // $user->isEnable     = $req->isEnable;
-            // $user->isCfm        = $req->isCfm;
-            $user->upd_date     = $req->upd_date;
-            $user->upd_time     = $req->upd_time;
-            $user->save();
+            $now = new DateTime();
 
-            return response(json_encode(
-                array(
-                    //'errorMsg' => 'User Not Found'
-                )
-            ), 200)->header('Content-Type', 'application/json');
+            $PositionTmp = new PositionTmp;
+            $PositionTmp->id           = $req->email;
+            $PositionTmp->upd_user     = $req->upd_user;
+            $PositionTmp->upd_date     = $now->format('Ymd');
+            $PositionTmp->upd_time     = $now->format('His');
+            $PositionTmp->save();
+
+            $UserTmp = new UserTmp;
+            $UserTmp->id           = $req->email;
+            $UserTmp->password     = $req->password;
+            $UserTmp->name         = $req->name;
+            $UserTmp->upd_user     = $req->upd_user;
+            $UserTmp->upd_date     = $now->format('Ymd');
+            $UserTmp->upd_time     = $now->format('His');
+            $UserTmp->save();
+
+            return response(200)->header('Content-Type', 'application/json');
         } catch (\Throwable $th) {
-            
-            return response(json_encode(
-                $th
-            ), 404)->header('Content-Type', 'application/json');
+            return response(404)->header('Content-Type', 'application/json');
         }
     }
 
