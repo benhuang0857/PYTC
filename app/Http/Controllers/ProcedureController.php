@@ -27,11 +27,7 @@ class ProcedureController extends Controller
                 ), JSON_UNESCAPED_UNICODE);
         } catch (\Throwable $th) {
             
-            return response(json_encode(
-                array(
-                    //'errorMsg' => 'User Not Found'
-                )
-            ), 404)->header('Content-Type', 'application/json');
+            return response(json_encode($th), 404)->header('Content-Type', 'application/json');
         }
     }
 
@@ -69,32 +65,16 @@ class ProcedureController extends Controller
     #Mysql Call Proc User_Select_Proc
     public function UserSelectProc(Request $req)
     {
-        $func = $req->func;
-        $id = $req->id;
-        $keyword = $req->keyword;
-        $position_unit = $req->position_unit;
-        $position_area = $req->position_area;
-        $enable = $req->enable;
-        $json = 'json_object("func","'.$func.'","id","'.$id.'","keyword","'.$keyword.'","position_unit","'.$position_unit.'","position_area","'.$position_area.'","enable","'.$enable.'")';
-
-        DB::select('call User_Select_Proc('.$json.', @out)');
-        $selectResult = DB::select('SELECT @out AS result');
-
-        $jObj = json_decode($selectResult[0]->result);
-        if($jObj != null)
+        try
         {
-            return json_encode(
-                $jObj, JSON_UNESCAPED_UNICODE
-            );
+            $id = $req->email;
+            $user = User::where('id', $id)->firstOrFail();
+            return json_encode($user, JSON_UNESCAPED_UNICODE);
+        } catch (\Throwable $th) {
+            return response(json_encode($th), 404)->header('Content-Type', 'application/json');
         }
-        else
-        {
-            return response(json_encode(
-                array(
-                    //'errorMsg' => 'User Not Found'
-                )
-            ), 404)->header('Content-Type', 'application/json');
-        }
+
+        
     }
 
     #Mysql Call Proc User_Update_Proc
