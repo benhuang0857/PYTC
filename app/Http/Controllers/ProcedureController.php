@@ -45,7 +45,7 @@ class ProcedureController extends Controller
         $upd_date   = date("Ymd");
         $upd_time   = date("His");
 
-        dd($req);
+        //dd($req);
 
         try
         {
