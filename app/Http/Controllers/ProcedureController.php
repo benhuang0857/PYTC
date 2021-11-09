@@ -40,7 +40,7 @@ class ProcedureController extends Controller
         try
         {
             $user = new UserTmp;
-            $user->id           = $req->id;
+            $user->id           = $req->email;
             $user->password     = $req->password;
             $user->name         = $req->name;
             $user->upd_user     = $req->upd_user;
