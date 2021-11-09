@@ -39,6 +39,7 @@ class ProcedureController extends Controller
         $id         = $req->email;
         $password   = $req->password;
         $name       = $req->name;
+        $upd_user   = $req->upd_user;
         $isEnable   = 'N';
         $isCfm      = 'N';
         $upd_date   = date("Ymd");
@@ -50,6 +51,7 @@ class ProcedureController extends Controller
             $user->id           = $id;
             $user->password     = $password;
             $user->name         = $password;
+            $user->upd_user     = $upd_user;
             $user->isEnable     = $isEnable;
             $user->isCfm        = $isCfm;
             $user->upd_date     = $upd_date;
