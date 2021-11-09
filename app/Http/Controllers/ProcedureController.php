@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use App\UserTmp;
 use DB;
 
 class ProcedureController extends Controller
