@@ -40,20 +40,20 @@ class ProcedureController extends Controller
         $password   = $req->password;
         $name       = $req->name;
         $upd_user   = $req->upd_user;
-        $isEnable   = 'N';
-        $isCfm      = 'N';
+        // $isEnable   = 'N';
+        // $isCfm      = 'N';
         $upd_date   = '20211102';
         $upd_time   = '220000';
 
         try
         {
-            $user = new User;
+            $user = new UserTmp;
             $user->id           = $id;
             $user->password     = $password;
             $user->name         = $name;
             $user->upd_user     = $upd_user;
-            $user->isEnable     = $isEnable;
-            $user->isCfm        = $isCfm;
+            // $user->isEnable     = $isEnable;
+            // $user->isCfm        = $isCfm;
             $user->upd_date     = $upd_date;
             $user->upd_time     = $upd_time;
             $user->save();
