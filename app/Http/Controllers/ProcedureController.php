@@ -42,10 +42,10 @@ class ProcedureController extends Controller
         $upd_user   = $req->upd_user;
         $isEnable   = 'N';
         $isCfm      = 'N';
-        $upd_date   = date("Ymd");
-        $upd_time   = date("His");
+        $upd_date   = date()->format('Ymd');
+        $upd_time   = date()->format('His');
 
-        //dd($req);
+        dd($upd_date);
 
         try
         {
