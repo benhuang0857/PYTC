@@ -41,7 +41,7 @@ class ProcedureController extends Controller
         $name       = $req->name;
         $isEnable   = 'N';
         $isCfm      = 'N';
-        $upd_date   = date("YMd");
+        $upd_date   = date("Ymd");
         $upd_time   = date("His");
 
         try
