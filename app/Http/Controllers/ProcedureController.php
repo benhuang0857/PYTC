@@ -57,9 +57,7 @@ class ProcedureController extends Controller
         } catch (\Throwable $th) {
             
             return response(json_encode(
-                array(
-                    //'errorMsg' => 'User Not Found'
-                )
+                $th
             ), 404)->header('Content-Type', 'application/json');
         }
     }
