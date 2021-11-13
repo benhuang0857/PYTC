@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\User;
 use App\UserTmp;
 use App\PositionTmp;
+use App\ListMenu;
 use DB;
 use DateTime;
 
@@ -113,80 +114,32 @@ class ProcedureController extends Controller
     #Mysql Call Proc User_Update_Proc
     public function UserUpdateProc(Request $req)
     {
-        $id = $req->id;
-        $name = $req->name;
-        $email = $req->email;
-        $password = $req->password;
-        $position = $req->position;
-        $enable_cd = $req->enable_cd;
-        $upd_user = $req->upd_user;
-        $json = 'json_object("id","'.$id.'","name","'.$name.'","email","'.$email.'","password","'.$password.'","position","'.$position.'","enable_cd","'.$enable_cd.'","upd_user","'.$upd_user.'")';
+        $user->password = $req->password;
+        $user->name = $req->name;
 
-        DB::select('call User_Update_Proc('.$json.', @out)');
-        $selectResult = DB::select('SELECT @out AS result');
+        $user = UserTmp::where('id', $req->email)->first();
 
-        $jObj = json_decode($selectResult[0]->result);
-        if($jObj != null)
+        try
         {
-            return json_encode(
-                $jObj, JSON_UNESCAPED_UNICODE
-            );
+            $user->save();
+            return response(200)->header('Content-Type', 'application/json');
+        } catch (\Throwable $th) {
+            return response(json_encode($th), 404)->header('Content-Type', 'application/json');
         }
-        else
-        {
-            return response(json_encode(
-                array(
-                    //'errorMsg' => 'User Not Found'
-                )
-            ), 404)->header('Content-Type', 'application/json');
-        }
-    }
 
-    
-    #Mysql Call Proc List_Insert_Proc 開發中
-    public function ListInsertProc(Request $req)
-    {
-        $gid = $req->gid;
-        $gname = $req->gname;
-        $mid = $req->mid;
-        $id = $req->id;
-        $item_no = $req->item_no;
-        $item_name = $req->item_name;
-        $upd_user = $req->upd_user;
-        $json = 'json_object("gid","'.$gid.'","gname","'.$gname.'","mid","'.$mid.'","id","'.$id.'","item_no","'.$item_no.'","item_name","'.$item_name.'","upd_user","'.$upd_user.'")';
-
-        DB::select('call List_Insert_Proc('.$json.', @out)');
-        $selectResult = DB::select('SELECT @out AS result');
-
-        dd($selectResult);
-        //return $selectResult;
     }
 
     #Mysql Call Proc List_Select_Proc
     public function ListSelectProc(Request $req)
     {
-        $func = $req->func;
-        $gid = $req->gid;
-        $mid = $req->mid;
-        $json = 'json_object("func","'.$func.'","gid","'.$gid.'","mid","'.$mid.'")';
+        $group_id = $req->group_id;
+        $lists = ListMenu::where('group_id', $group_id)->get();
 
-        DB::select('call List_Select_Proc('.$json.', @out)');
-        $selectResult = DB::select('SELECT @out AS result');
-
-        $jObj = json_decode($selectResult[0]->result);
-        if($jObj != null)
+        try
         {
-            return json_encode(
-                $jObj, JSON_UNESCAPED_UNICODE
-            );
-        }
-        else
-        {
-            return response(json_encode(
-                array(
-                    //'errorMsg' => 'User Not Found'
-                )
-            ), 404)->header('Content-Type', 'application/json');
+            return json_encode($lists, JSON_UNESCAPED_UNICODE);
+        } catch (\Throwable $th) {
+            return response(json_encode($th), 404)->header('Content-Type', 'application/json');
         }
     }
 }
