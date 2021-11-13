@@ -77,7 +77,7 @@ class ProcedureController extends Controller
                 })
                 ->where('User_Position.unit', $unit)
                 ->where('User_Position.area', $area)
-                ->where('User.isEnabled', $isEnable)
+                ->where('User.isEnable', $isEnable)
                 ->get();
 
         dd($user);
