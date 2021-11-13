@@ -73,8 +73,6 @@ class ProcedureController extends Controller
         } catch (\Throwable $th) {
             return response(json_encode($th), 404)->header('Content-Type', 'application/json');
         }
-
-        
     }
 
     #Mysql Call Proc User_Update_Proc
