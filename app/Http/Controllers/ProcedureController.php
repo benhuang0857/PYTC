@@ -133,11 +133,23 @@ class ProcedureController extends Controller
     public function ListSelectProc(Request $req)
     {
         $group_id = $req->group_id;
-        $lists = ListMenu::where('group_id', $group_id)->get();
+        $lists = ListMenu::where('group_id', $group_id)
+                         ->where('item_value', '')->get();
+
+        $menuArr = array();
+
+        foreach($lists as $key => $list)
+        {
+            $combin = [
+                'item_name' => $list->item_name,
+                'item_mid' => $list->item_mid
+            ];
+            array_push($menuArr, $combin);
+        }
 
         try
         {
-            return json_encode($lists, JSON_UNESCAPED_UNICODE);
+            return json_encode($menuArr, JSON_UNESCAPED_UNICODE);
         } catch (\Throwable $th) {
             return response(json_encode($th), 404)->header('Content-Type', 'application/json');
         }
