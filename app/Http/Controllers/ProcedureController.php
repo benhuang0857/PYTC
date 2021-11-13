@@ -80,7 +80,7 @@ class ProcedureController extends Controller
                 ->where('User.isEnable', $isEnable)
                 ->get();
 
-        dd($user);
+        dd($users);
 
         $totalCount = count( $users );
         $totalPage = ceil( $totalCount/$pageSize );
