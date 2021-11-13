@@ -68,7 +68,7 @@ class ProcedureController extends Controller
         $keyword = $req->keyword;
         $unit = $req->unit;
         $area = $req->area;
-        $isEnabled = $req->isEnabled;
+        $isEnable = $req->isEnable;
         $pageSize = $req->pageSize;
 
         $users = DB::table('User')
@@ -77,7 +77,7 @@ class ProcedureController extends Controller
                 })
                 ->where('User_Position.unit', $unit)
                 ->where('User_Position.area', $area)
-                ->where('User.isEnabled', $isEnabled)
+                ->where('User.isEnabled', $isEnable)
                 ->get();
 
         dd($user);
