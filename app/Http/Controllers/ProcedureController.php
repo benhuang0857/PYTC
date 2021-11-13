@@ -80,8 +80,6 @@ class ProcedureController extends Controller
                 ->where('User.isEnable', $isEnable)
                 ->get();
 
-        dd($users);
-
         $totalCount = count( $users );
         $totalPage = ceil( $totalCount/$pageSize );
 
@@ -93,8 +91,8 @@ class ProcedureController extends Controller
                 'email' => $user->id,
                 'name' => $user->name,
                 'unit' => $user->unit,
-                'areas' => $user->areas,
-                'isEnabled' => $user->isEnabled,
+                'area' => $user->area,
+                'isEnable' => $user->isEnable,
                 'pageNumber' => floor($key/$totalPage)
             ];
             array_push($usersArr, $combin);
