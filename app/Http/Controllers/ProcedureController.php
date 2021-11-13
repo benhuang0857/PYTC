@@ -114,10 +114,9 @@ class ProcedureController extends Controller
     #Mysql Call Proc User_Update_Proc
     public function UserUpdateProc(Request $req)
     {
+        $user = UserTmp::where('id', $req->email)->first();
         $user->password = $req->password;
         $user->name = $req->name;
-
-        $user = UserTmp::where('id', $req->email)->first();
 
         try
         {
