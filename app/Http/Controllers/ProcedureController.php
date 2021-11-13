@@ -93,7 +93,7 @@ class ProcedureController extends Controller
                 'unit' => $user->unit,
                 'area' => $user->area,
                 'isEnable' => $user->isEnable,
-                'pageNumber' => floor($key/$totalPage)
+                'pageNumber' => (int)floor($key/$totalPage)
             ];
             array_push($usersArr, $combin);
         }
