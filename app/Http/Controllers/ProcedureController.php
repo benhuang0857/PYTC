@@ -134,7 +134,7 @@ class ProcedureController extends Controller
     {
         $group_id = $req->group_id;
         $lists = ListMenu::where('group_id', $group_id)
-                         ->where('item_value', '')->get();
+                         ->where('item_value', '!=', '')->get();
 
         $menuArr = array();
 
