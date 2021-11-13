@@ -19,8 +19,10 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 //請在URL加上api/{route_name}這樣才有辦法calling下方API
 Route::post('signin', 'ProcedureController@LoginProc')->middleware('cors');
-Route::post('list/insert', 'ProcedureController@ListInsertProc')->middleware('cors'); #目前不清楚做法為何
-Route::get('list/select', 'ProcedureController@ListSelectProc')->middleware('cors');
-Route::post('user/insert', 'ProcedureController@UserInsertProc')->middleware('cors');
+Route::post('signup', 'ProcedureController@UserInsertProc')->middleware('cors');
 Route::post('user/select', 'ProcedureController@UserSelectProc')->middleware('cors');
 Route::post('user/update', 'ProcedureController@UserUpdateProc')->middleware('cors');
+
+Route::get('list/select', 'ProcedureController@ListSelectProc')->middleware('cors');
+Route::post('list/insert', 'ProcedureController@ListInsertProc')->middleware('cors'); #目前不清楚做法為何
+
