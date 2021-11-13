@@ -65,6 +65,41 @@ class ProcedureController extends Controller
     #Mysql Call Proc User_Select_Proc
     public function UserSelectProc(Request $req)
     {
+        $keyword = $req->keyword;
+        $unit = $req->unit;
+        $area = $req->area;
+        $isEnabled = $req->isEnabled;
+        $pageSize = $req->pageSize;
+
+        $users = DB::table('User')
+                ->leftJoin('User_Position' , function($join) {
+                    $join->on('User.id', '=', 'User_Position.id');
+                })
+                ->where('User_Position.unit', $unit)
+                ->where('User_Position.area', $area)
+                ->where('User.isEnabled', $isEnabled)
+                ->get();
+
+        dd($user);
+
+        $totalCount = count( $users );
+        $totalPage = ceil( $totalCount/$pageSize );
+
+        $usersArr = array();
+
+        foreach($users as $key => $user)
+        {
+            $combin = [
+                'email' => $user->id,
+                'name' => $user->name,
+                'unit' => $user->unit,
+                'areas' => $user->areas,
+                'isEnabled' => $user->isEnabled,
+                'pageNumber' => floor($key/$totalPage)
+            ];
+            array_push($usersArr, $combin);
+        }
+
         try
         {
             $id = $req->email;
