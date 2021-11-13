@@ -93,18 +93,14 @@ class ProcedureController extends Controller
                 'unit' => $user->unit,
                 'area' => $user->area,
                 'isEnable' => $user->isEnable,
-                'pageNumber' => (int)floor($key/$totalPage)
+                'pageNumber' => (int)floor($key/$totalPage) + 1
             ];
             array_push($usersArr, $combin);
         }
 
-        dd($usersArr);
-
         try
         {
-            $id = $req->email;
-            $user = User::where('id', $id)->firstOrFail();
-            return json_encode($user, JSON_UNESCAPED_UNICODE);
+            return json_encode([$totalCount, $totalPage, $combin], JSON_UNESCAPED_UNICODE);
         } catch (\Throwable $th) {
             return response(json_encode($th), 404)->header('Content-Type', 'application/json');
         }
