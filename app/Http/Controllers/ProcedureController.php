@@ -100,7 +100,11 @@ class ProcedureController extends Controller
 
         try
         {
-            return json_encode([$totalCount, $totalPage, $combin], JSON_UNESCAPED_UNICODE);
+            return json_encode([
+                "totalCount" => $totalCount, 
+                "totalPage" => $totalPage, 
+                "data" => $combin
+            ], JSON_UNESCAPED_UNICODE);
         } catch (\Throwable $th) {
             return response(json_encode($th), 404)->header('Content-Type', 'application/json');
         }
