@@ -80,8 +80,6 @@ class ProcedureController extends Controller
                 ->where('User.isEnable', $isEnable)
                 ->get();
 
-        dd($users);
-
         $totalCount = count( $users );
         $totalPage = ceil( $totalCount/$pageSize );
 
@@ -99,6 +97,8 @@ class ProcedureController extends Controller
             ];
             array_push($usersArr, $combin);
         }
+
+        dd($usersArr);
 
         try
         {
