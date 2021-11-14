@@ -136,19 +136,29 @@ class ProcedureController extends Controller
                          ->where('item_value', '!=', '')->get();
 
         $menuArr = array();
+        $totalCount = 0;
 
         foreach($lists as $key => $list)
         {
             $combin = [
-                'item_value' => $list->item_value,
-                'item_name' => $list->item_name
+                'text' => $list->item_value,
+                'value' => $list->item_name
             ];
             array_push($menuArr, $combin);
         }
 
+        $totalCount = count($menuArr);
+
         try
         {
-            return json_encode($menuArr, JSON_UNESCAPED_UNICODE);
+            return json_encode(
+                [
+                    'totalCount' => $totalCount,
+                    'totalPage' => 0,
+                    'data' => $menuArr,
+                    'pageSize' => 10,
+                    'pageNumber' => 1
+                ], JSON_UNESCAPED_UNICODE);
         } catch (\Throwable $th) {
             return response(json_encode($th), 404)->header('Content-Type', 'application/json');
         }
