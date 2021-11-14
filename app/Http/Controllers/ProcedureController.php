@@ -140,8 +140,8 @@ class ProcedureController extends Controller
         foreach($lists as $key => $list)
         {
             $combin = [
-                'item_name' => $list->item_name,
-                'item_mid' => $list->item_mid
+                'item_value' => $list->item_value,
+                'item_name' => $list->item_name
             ];
             array_push($menuArr, $combin);
         }
