@@ -43,7 +43,7 @@ class ProcedureController extends Controller
             $PositionTmp = new PositionTmp;
 
             foreach ($unitArr as $item) {
-                dd($item);
+                dd($item->unit);
                 $PositionTmp->id           = $req->email;
                 $PositionTmp->unit         = $item->unit;
                 $PositionTmp->area         = $item->area;
