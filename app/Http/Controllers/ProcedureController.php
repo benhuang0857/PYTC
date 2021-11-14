@@ -78,7 +78,9 @@ class ProcedureController extends Controller
         $pageSize = 10;
         $pageNumber = 1;
 
-        $users = DB::table('User')
+        if($unit != "" && $area != "" )
+        {
+            $users = DB::table('User')
                 ->leftJoin('User_Position' , function($join) {
                     $join->on('User.id', '=', 'User_Position.id');
                 })
@@ -86,6 +88,17 @@ class ProcedureController extends Controller
                 ->where('User_Position.area', $area)
                 ->where('User.isEnable', $isEnable)
                 ->get();
+        }
+
+        if($unit == "" && $area == "" )
+        {
+            $users = DB::table('User')
+                ->leftJoin('User_Position' , function($join) {
+                    $join->on('User.id', '=', 'User_Position.id');
+                })
+                ->where('User.isEnable', $isEnable)
+                ->get();
+        }
 
         $totalCount = count( $users );
         $totalPage = ceil( $totalCount/$pageSize );
