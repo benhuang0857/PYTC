@@ -35,14 +35,16 @@ class ProcedureController extends Controller
     #Mysql Call Proc User_Insert_Proc
     public function UserInsertProc(Request $req)
     {
+
+        dd($req);
         try
         {
             $now = new DateTime();
 
             $PositionTmp = new PositionTmp;
             $PositionTmp->id           = $req->email;
-            $PositionTmp->unit         = '0';
-            $PositionTmp->area         = '0';
+            $PositionTmp->unit         = $req->unit;
+            $PositionTmp->area         = $req->area;
             $PositionTmp->upd_user     = $req->upd_user;
             $PositionTmp->upd_date     = $now->format('Ymd');
             $PositionTmp->upd_time     = $now->format('His');
