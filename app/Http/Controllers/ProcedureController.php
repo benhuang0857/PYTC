@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\User;
 use App\UserTmp;
 use App\PositionTmp;
+use App\Position;
 use App\ListMenu;
 use DB;
 use DateTime;
@@ -73,10 +74,6 @@ class ProcedureController extends Controller
         $keyword = $req->keyword;
         $unit = $req->unit;
         $area = $req->area;
-        // "sortInfo": {
-        //     "sortColumn": "id",
-        //     "sortBy": "asc"
-        // },
         $isEnable = $req->isEnable;
         $pageSize = 10;
         $pageNumber = 1;
@@ -97,11 +94,22 @@ class ProcedureController extends Controller
 
         foreach($users as $key => $user)
         {
+            $unitsArr = array();
+            $positions = Position::where('id', $user->id)->get();
+
+            foreach ($positions as $key => $pos) {
+                $unitTmp = [
+                    'unit' => $pos->unit,
+                    'area' => $pos->area,
+                ];
+                $unitTmpJson = json_encode($unitTmp, JSON_UNESCAPED_UNICODE);
+                array_push($unitsArr, $unitTmpJson);
+            }
+
             $combin = [
                 'email' => $user->id,
                 'name' => $user->name,
-                'unit' => $user->unit,
-                'area' => $user->area,
+                'units' => $unitsArr,
                 'isEnable' => $user->isEnable,
                 'pageNumber' => (int)($key/$totalPage) #錯誤頁數
             ];
@@ -110,7 +118,11 @@ class ProcedureController extends Controller
 
         try
         {
-            return json_encode(200, JSON_UNESCAPED_UNICODE);
+            return json_encode([
+                "totalCount" => $totalCount, 
+                "totalPage" => $totalPage, 
+                "data" => $combin
+            ], JSON_UNESCAPED_UNICODE);
         } catch (\Throwable $th) {
             return response(json_encode($th), 404)->header('Content-Type', 'application/json');
         }
