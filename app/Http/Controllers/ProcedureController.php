@@ -36,20 +36,22 @@ class ProcedureController extends Controller
     public function UserInsertProc(Request $req)
     {
 
-        dd($req->units);
+        $unitArr = $req->units;
         try
         {
             $now = new DateTime();
 
-            $PositionTmp = new PositionTmp;
-            $PositionTmp->id           = $req->email;
-            $PositionTmp->unit         = $req->unit;
-            $PositionTmp->area         = $req->area;
-            $PositionTmp->upd_user     = $req->upd_user;
-            $PositionTmp->upd_date     = $now->format('Ymd');
-            $PositionTmp->upd_time     = $now->format('His');
-            $PositionTmp->save();
-
+            foreach ($unitArr as $item) {
+                $PositionTmp = new PositionTmp;
+                $PositionTmp->id           = $req->email;
+                $PositionTmp->unit         = $item->unit;
+                $PositionTmp->area         = $item->area;
+                $PositionTmp->upd_user     = $req->upd_user;
+                $PositionTmp->upd_date     = $now->format('Ymd');
+                $PositionTmp->upd_time     = $now->format('His');
+                $PositionTmp->save();
+            }
+            
             $UserTmp = new UserTmp;
             $UserTmp->id           = $req->email;
             $UserTmp->password     = $req->password;
