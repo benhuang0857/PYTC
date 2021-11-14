@@ -73,8 +73,13 @@ class ProcedureController extends Controller
         $keyword = $req->keyword;
         $unit = $req->unit;
         $area = $req->area;
+        // "sortInfo": {
+        //     "sortColumn": "id",
+        //     "sortBy": "asc"
+        // },
         $isEnable = $req->isEnable;
-        $pageSize = $req->pageSize;
+        $pageSize = 10;
+        $pageNumber = 1;
 
         $users = DB::table('User')
                 ->leftJoin('User_Position' , function($join) {
@@ -105,11 +110,7 @@ class ProcedureController extends Controller
 
         try
         {
-            return json_encode([
-                "totalCount" => $totalCount, 
-                "totalPage" => $totalPage, 
-                "data" => $combin
-            ], JSON_UNESCAPED_UNICODE);
+            return json_encode(200, JSON_UNESCAPED_UNICODE);
         } catch (\Throwable $th) {
             return response(json_encode($th), 404)->header('Content-Type', 'application/json');
         }
