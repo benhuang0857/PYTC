@@ -78,7 +78,7 @@ class ProcedureController extends Controller
         $pageSize = 10;
         $pageNumber = 1;
 
-        if($unit != "" && $area != "")
+        if($unit != "" && $area != "" )
         {
             $users = DB::table('User')
                 ->leftJoin('User_Position' , function($join) {
@@ -89,6 +89,7 @@ class ProcedureController extends Controller
                 ->where('User.isEnable', $isEnable)
                 ->get();
         }
+
         if($unit == "" && $area == "" )
         {
             $users = DB::table('User')
