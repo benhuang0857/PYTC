@@ -46,7 +46,7 @@ class ProcedureController extends Controller
                 $PositionTmp->id           = $req->email;
                 $PositionTmp->unit         = $item->unit;
                 $PositionTmp->area         = $item->area;
-                $PositionTmp->upd_user     = $req->upd_user;
+                $PositionTmp->upd_user     = 'admin@gmail.com';
                 $PositionTmp->upd_date     = $now->format('Ymd');
                 $PositionTmp->upd_time     = $now->format('His');
                 $PositionTmp->save();
@@ -56,7 +56,7 @@ class ProcedureController extends Controller
             $UserTmp->id           = $req->email;
             $UserTmp->password     = $req->password;
             $UserTmp->name         = $req->name;
-            $UserTmp->upd_user     = $req->upd_user;
+            $UserTmp->upd_user     = 'admin@gmail.com';
             $UserTmp->upd_date     = $now->format('Ymd');
             $UserTmp->upd_time     = $now->format('His');
             $UserTmp->save();
