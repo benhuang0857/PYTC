@@ -111,9 +111,15 @@ class ProcedureController extends Controller
             $positions = Position::where('id', $user->id)->get();
 
             foreach ($positions as $key => $pos) {
+
+                $areaName = ListMenu::where('group_id', 'pos_area')
+                                    ->where('item_value', $pos->area)->first()->item_name;
+                $unitName = ListMenu::where('group_id', 'pos_unit')
+                                    ->where('item_value', $pos->unit)->first()->item_name;
+
                 $unitTmp = [
-                    'unit' => $pos->unit,
-                    'area' => $pos->area,
+                    'unit' => $unitName,
+                    'area' => $areaName,
                 ];
                 $unitTmpJson = json_encode($unitTmp, JSON_UNESCAPED_UNICODE);
                 array_push($unitsArr, $unitTmpJson);
@@ -135,7 +141,7 @@ class ProcedureController extends Controller
                 "totalPage" => $totalPage, 
                 "data" => $usersArr,
                 'pageSize' => $pageSize,
-                'pageNumber' => (int)($key/$totalPage)
+                'pageNumber' => $totalPage
             ], JSON_UNESCAPED_UNICODE);
         } catch (\Throwable $th) {
             return response(json_encode($th), 404)->header('Content-Type', 'application/json');
