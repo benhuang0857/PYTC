@@ -124,7 +124,6 @@ class ProcedureController extends Controller
                 'name' => $user->name,
                 'units' => $unitsArr,
                 'isEnable' => $user->isEnable,
-                'pageNumber' => (int)($key/$totalPage) #錯誤頁數
             ];
             array_push($usersArr, $combin);
         }
@@ -134,7 +133,9 @@ class ProcedureController extends Controller
             return json_encode([
                 "totalCount" => $totalCount, 
                 "totalPage" => $totalPage, 
-                "data" => $usersArr
+                "data" => $usersArr,
+                'pageSize' => $pageSize,
+                'pageNumber' => (int)($key/$totalPage)
             ], JSON_UNESCAPED_UNICODE);
         } catch (\Throwable $th) {
             return response(json_encode($th), 404)->header('Content-Type', 'application/json');
