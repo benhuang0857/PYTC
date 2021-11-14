@@ -100,6 +100,8 @@ class ProcedureController extends Controller
                 ->get();
         }
 
+        dd($users);
+
         $totalCount = count( $users );
         $totalPage = ceil( $totalCount/$pageSize );
 
