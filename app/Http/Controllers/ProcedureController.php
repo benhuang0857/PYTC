@@ -43,10 +43,9 @@ class ProcedureController extends Controller
             $PositionTmp = new PositionTmp;
 
             foreach ($unitArr as $item) {
-                dd($item['unit']);
                 $PositionTmp->id           = $req->email;
-                $PositionTmp->unit         = $item->unit;
-                $PositionTmp->area         = $item->area;
+                $PositionTmp->unit         = $item['unit'];
+                $PositionTmp->area         = $item['area'];
                 $PositionTmp->upd_user     = 'admin@gmail.com';
                 $PositionTmp->upd_date     = $now->format('Ymd');
                 $PositionTmp->upd_time     = $now->format('His');
