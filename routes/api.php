@@ -24,4 +24,3 @@ Route::post('employee', 'ProcedureController@UserSelectProc')->middleware('cors'
 Route::post('employee/update', 'ProcedureController@UserUpdateProc')->middleware('cors');
 
 Route::post('menu', 'ProcedureController@ListSelectProc')->middleware('cors');
-
