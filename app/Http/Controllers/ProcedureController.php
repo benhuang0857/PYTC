@@ -36,7 +36,7 @@ class ProcedureController extends Controller
     public function UserInsertProc(Request $req)
     {
 
-        dd($req->content);
+        dd($req);
         try
         {
             $now = new DateTime();
