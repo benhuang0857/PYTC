@@ -224,10 +224,10 @@ class ProcedureController extends Controller
 
         //Kill
         $positions = Position::where('id', $req->email)->delete();
-        $position = new Position();
-
+        
         foreach ($units as $unitItem) {
-            $position->id    = $req->email;
+            $position = new Position();
+            $position->id       = (string)$req->email;
             $position->unit     = (string)$unitItem['unit'];
             $position->area     = (string)$unitItem['area'];
             $position->upd_user = 'admin@gmail.com';
