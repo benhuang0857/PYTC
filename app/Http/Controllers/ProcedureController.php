@@ -220,7 +220,8 @@ class ProcedureController extends Controller
         $user->upd_time     = $now->format('His');
         $user->save();
 
-        $units = $req->units;
+        $units = json_decode( $req->units );
+        dd($unit);
 
         //Kill
         $positions = Position::where('id', $req->email)->delete();
