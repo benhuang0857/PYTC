@@ -123,7 +123,7 @@ class ProcedureController extends Controller
                     'unit' => $unitName,
                     'area' => $areaName,
                 ];
-                $unitTmpJson = json_encode($unitTmp, JSON_UNESCAPED_UNICODE);
+                $unitTmpJson = $unitTmp;
                 array_push($unitsArr, $unitTmpJson);
             }
 
