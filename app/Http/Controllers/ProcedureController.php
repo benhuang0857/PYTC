@@ -158,7 +158,9 @@ class ProcedureController extends Controller
         $users = DB::table('User')
         ->leftJoin('User_Position' , function($join) {
             $join->on('User.id', '=', 'User_Position.id');
-        })->get();
+        })
+        ->where('User.id', $id)
+        ->get();
 
         $usersArr = array();
 
