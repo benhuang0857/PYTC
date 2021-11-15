@@ -230,6 +230,7 @@ class ProcedureController extends Controller
             $position->id    = $req->email;
             $position->unit     = $unitItem['unit'];
             $position->area     = $unitItem['area'];
+            $position->upd_user = 'admin@gmail.com';
             $position->upd_date = $now->format('Ymd');
             $position->upd_time = $now->format('His');
             $position->save();
