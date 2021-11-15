@@ -158,9 +158,7 @@ class ProcedureController extends Controller
         $users = DB::table('User')
         ->leftJoin('User_Position' , function($join) {
             $join->on('User.id', '=', 'User_Position.id');
-        })
-        ->where('User.isEnable', $isEnable)
-        ->get();
+        })->get();
 
         $usersArr = array();
 
