@@ -150,6 +150,54 @@ class ProcedureController extends Controller
         }
     }
 
+    #Mysql Call Proc User_Select_Proc One person
+    public function UserSelectOneProc(Request $req)
+    {
+        $id = $req->email;
+
+        $users = DB::table('User')
+        ->leftJoin('User_Position' , function($join) {
+            $join->on('User.id', '=', 'User_Position.id');
+        })
+        ->where('User.isEnable', $isEnable)
+        ->get();
+
+        $usersArr = array();
+
+        foreach($users as $key => $user)
+        {
+            $unitsArr = array();
+            $positions = Position::where('id', $user->id)->get();
+
+            foreach ($positions as $key => $pos) {
+
+                $areaName = ListMenu::where('group_id', 'pos_area')
+                                    ->where('item_value', $pos->area)->first()->item_name;
+                $unitName = ListMenu::where('group_id', 'pos_unit')
+                                    ->where('item_value', $pos->unit)->first()->item_name;
+
+                $unitTmp = [
+                    'unit' => $unitName,
+                    'area' => $areaName,
+                ];
+                $unitTmpJson = $unitTmp;
+                array_push($unitsArr, $unitTmpJson);
+            }
+        }
+
+        try
+        {
+            return json_encode([
+                'email' => $user->id,
+                'name' => $user->name,
+                'isEnable' => $user->isEnable,
+                'units' => $unitsArr
+            ], JSON_UNESCAPED_UNICODE);
+        } catch (\Throwable $th) {
+            return response(json_encode($th), 404)->header('Content-Type', 'application/json');
+        }
+    }
+
     #Mysql Call Proc User_Update_Proc
     public function UserUpdateProc(Request $req)
     {
