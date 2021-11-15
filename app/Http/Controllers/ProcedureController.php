@@ -228,8 +228,8 @@ class ProcedureController extends Controller
 
         foreach ($units as $unitItem) {
             $position->id    = $req->email;
-            $position->unit     = $unitItem['unit'];
-            $position->area     = $unitItem['area'];
+            $position->unit     = (string)$unitItem['unit'];
+            $position->area     = (string)$unitItem['area'];
             $position->upd_user = 'admin@gmail.com';
             $position->upd_date = $now->format('Ymd');
             $position->upd_time = $now->format('His');
