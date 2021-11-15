@@ -226,10 +226,10 @@ class ProcedureController extends Controller
         $positions = Position::where('id', $req->email)->delete();
         $position = new Position();
 
-        foreach ($units as $unitItem) {
+        foreach ($units as $key => $unitItem) {
             $position->email    = $req->email;
-            $position->unit     = $unitItem->unit;
-            $position->area     = $unitItem->area;
+            $position->unit     = $unitItem[$key]->unit;
+            $position->area     = $unitItem[$key]->area;
             $position->upd_date = $now->format('Ymd');
             $position->upd_time = $now->format('His');
             $position->save();
