@@ -94,7 +94,7 @@ class ProcedureController extends Controller
         {
             $users = DB::table('User')
                 ->select('*')
-                ->leftJoin('User_Position' , function($join) {
+                ->join('User_Position' , function($join) {
                     $join->on('User.id', '=', 'User_Position.id');
                 })
                 ->where('User.isEnable', $isEnable)
