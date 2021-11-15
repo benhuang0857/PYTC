@@ -216,8 +216,8 @@ class ProcedureController extends Controller
 
         $now = new DateTime();
         $user->upd_user     = 'admin@gmail.com';
-        $user->upd_date     = $now->format('Ymd');
-        $user->upd_time     = $now->format('His');
+        // $user->upd_date     = $now->format('Ymd');
+        // $user->upd_time     = $now->format('His');
         $user->save();
 
         $units = $req->units;
@@ -231,8 +231,8 @@ class ProcedureController extends Controller
             $position->unit     = (string)$unitItem['unit'];
             $position->area     = (string)$unitItem['area'];
             $position->upd_user = 'admin@gmail.com';
-            $position->upd_date = $now->format('Ymd');
-            $position->upd_time = $now->format('His');
+            // $position->upd_date = $now->format('Ymd');
+            // $position->upd_time = $now->format('His');
             $position->save();
         }
 
