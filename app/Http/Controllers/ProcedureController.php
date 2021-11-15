@@ -55,7 +55,7 @@ class ProcedureController extends Controller
             $UserTmp->id           = $req->email;
             $UserTmp->password     = $req->password;
             $UserTmp->name         = $req->name;
-            $UserTmp->isEnable     = $req->isEnable;
+            $UserTmp->isEnable     = 'Y';
             $UserTmp->upd_user     = 'admin@gmail.com';
             $UserTmp->upd_date     = $now->format('Ymd');
             $UserTmp->upd_time     = $now->format('His');
