@@ -22,6 +22,6 @@ Route::post('signin', 'ProcedureController@LoginProc')->middleware('cors');
 Route::post('signup', 'ProcedureController@UserInsertProc')->middleware('cors');
 Route::post('employee', 'ProcedureController@UserSelectProc')->middleware('cors');
 Route::post('employeeone', 'ProcedureController@UserSelectOneProc')->middleware('cors');
-Route::put('employee/update', 'ProcedureController@UserUpdateProc')->middleware('cors');
+Route::put('employee', 'ProcedureController@UserUpdateProc')->middleware('cors');
 
 Route::post('menu', 'ProcedureController@ListSelectProc')->middleware('cors');
