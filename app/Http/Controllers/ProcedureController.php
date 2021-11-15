@@ -224,17 +224,17 @@ class ProcedureController extends Controller
 
         //Kill
         $positions = Position::where('id', $req->email)->delete();
-        // $position = new Position();
+        $position = new Position();
 
-        // foreach ($units as $unitItem) {
-        //     $position->id    = $req->email;
-        //     $position->unit     = (string)$unitItem['unit'];
-        //     $position->area     = (string)$unitItem['area'];
-        //     $position->upd_user = 'admin@gmail.com';
-        //     // $position->upd_date = $now->format('Ymd');
-        //     // $position->upd_time = $now->format('His');
-        //     $position->save();
-        // }
+        foreach ($units as $unitItem) {
+            $position->id    = $req->email;
+            $position->unit     = (string)$unitItem['unit'];
+            $position->area     = (string)$unitItem['area'];
+            $position->upd_user = 'admin@gmail.com';
+            // $position->upd_date = $now->format('Ymd');
+            // $position->upd_time = $now->format('His');
+            $position->save();
+        }
 
         try
         {
