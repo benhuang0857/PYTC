@@ -81,20 +81,22 @@ class ProcedureController extends Controller
         if($unit != "" && $area != "" )
         {
             $users = DB::table('User')
-                ->join('User.id', '=', 'User_Position.id')
+                ->leftJoin('User_Position' , function($join) {
+                    $join->on('User.id', '=', 'User_Position.id');
+                })
                 ->where('User_Position.unit', $unit)
                 ->where('User_Position.area', $area)
                 ->where('User.isEnable', $isEnable)
-                ->groupBy('User.id')
                 ->get();
         }
 
         if($unit == "" && $area == "" )
         {
             $users = DB::table('User')
-                ->join('User.id', '=', 'User_Position.id')
+                ->leftJoin('User_Position' , function($join) {
+                    $join->on('User.id', '=', 'User_Position.id');
+                })
                 ->where('User.isEnable', $isEnable)
-                ->groupBy('User.id')
                 ->get();
         }
 
