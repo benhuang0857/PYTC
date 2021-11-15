@@ -77,26 +77,50 @@ class ProcedureController extends Controller
         $pageSize = 10;
         $pageNumber = 1;
 
-        if($unit != "" && $area != "" )
+        if($isEnable != "")
         {
-            $users = DB::table('User')
-                ->leftJoin('User_Position' , function($join) {
-                    $join->on('User.id', '=', 'User_Position.id');
-                })
-                ->where('User_Position.unit', $unit)
-                ->where('User_Position.area', $area)
-                ->where('User.isEnable', $isEnable)
-                ->get();
-        }
+            if($unit != "" && $area != "" )
+            {
+                $users = DB::table('User')
+                    ->leftJoin('User_Position' , function($join) {
+                        $join->on('User.id', '=', 'User_Position.id');
+                    })
+                    ->where('User_Position.unit', $unit)
+                    ->where('User_Position.area', $area)
+                    ->where('User.isEnable', $isEnable)
+                    ->get();
+            }
 
-        if($unit == "" && $area == "" )
+            if($unit == "" && $area == "" )
+            {
+                $users = DB::table('User')
+                    ->leftJoin('User_Position' , function($join) {
+                        $join->on('User.id', '=', 'User_Position.id');
+                    })
+                    ->where('User.isEnable', $isEnable)
+                    ->get();
+            }
+        }
+        else
         {
-            $users = DB::table('User')
-                ->leftJoin('User_Position' , function($join) {
-                    $join->on('User.id', '=', 'User_Position.id');
-                })
-                ->where('User.isEnable', $isEnable)
-                ->get();
+            if($unit != "" && $area != "" )
+            {
+                $users = DB::table('User')
+                    ->leftJoin('User_Position' , function($join) {
+                        $join->on('User.id', '=', 'User_Position.id');
+                    })
+                    ->where('User_Position.unit', $unit)
+                    ->where('User_Position.area', $area)
+                    ->get();
+            }
+
+            if($unit == "" && $area == "" )
+            {
+                $users = DB::table('User')
+                    ->leftJoin('User_Position' , function($join) {
+                        $join->on('User.id', '=', 'User_Position.id');
+                    })->get();
+            }
         }
 
         //dd($users);
