@@ -85,6 +85,7 @@ class ProcedureController extends Controller
                 ->where('User_Position.unit', $unit)
                 ->where('User_Position.area', $area)
                 ->where('User.isEnable', $isEnable)
+                ->groupBy('User.id')
                 ->get();
         }
 
