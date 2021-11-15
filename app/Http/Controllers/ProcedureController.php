@@ -171,18 +171,28 @@ class ProcedureController extends Controller
 
             foreach ($positions as $key => $pos) {
 
-                $areaName = ListMenu::where('group_id', 'pos_area')
-                                    ->where('item_value', $pos->area)->first()->item_name;
-                $unitName = ListMenu::where('group_id', 'pos_unit')
-                                    ->where('item_value', $pos->unit)->first()->item_name;
+                // $areaName = ListMenu::where('group_id', 'pos_area')
+                //                     ->where('item_value', $pos->area)->first()->item_name;
+                // $unitName = ListMenu::where('group_id', 'pos_unit')
+                //                     ->where('item_value', $pos->unit)->first()->item_name;
 
                 $unitTmp = [
-                    'unit' => $unitName,
-                    'area' => $areaName,
+                    'unit' => $pos->unit,
+                    'area' => $pos->area,
                 ];
                 $unitTmpJson = $unitTmp;
                 array_push($unitsArr, $unitTmpJson);
             }
+        }
+
+        $isEnabled = true;
+        if($user->isEnable == 'Y')
+        {
+            $isEnabled = true;
+        }
+        else
+        {
+            $isEnabled = false;
         }
 
         try
@@ -190,7 +200,7 @@ class ProcedureController extends Controller
             return json_encode([
                 'email' => $user->id,
                 'name' => $user->name,
-                'isEnable' => $user->isEnable,
+                'isEnable' => $isEnabled,
                 'units' => $unitsArr
             ], JSON_UNESCAPED_UNICODE);
         } catch (\Throwable $th) {
