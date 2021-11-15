@@ -229,7 +229,16 @@ class ProcedureController extends Controller
         $user = User::where('id', $req->email)->first();
         //$user->password     = $req->password;
         $user->name         = $req->name;
-        $user->isEnable     = $req->isEnable;
+
+        $user->isEnable     = 'Y';
+        if($req->isEnable == '0')
+        {
+            $user->isEnable = 'N';
+        }
+        else
+        {
+            $user->isEnable = 'Y';
+        }
 
         // $now = new DateTime();
         $user->upd_user     = 'admin@gmail.com';
