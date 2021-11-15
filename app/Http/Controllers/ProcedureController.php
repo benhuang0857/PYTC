@@ -93,6 +93,7 @@ class ProcedureController extends Controller
         if($unit == "" && $area == "" )
         {
             $users = DB::table('User')
+                ->select('*')
                 ->leftJoin('User_Position' , function($join) {
                     $join->on('User.id', '=', 'User_Position.id');
                 })
