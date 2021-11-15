@@ -97,6 +97,7 @@ class ProcedureController extends Controller
                     $join->on('User.id', '=', 'User_Position.id');
                 })
                 ->where('User.isEnable', $isEnable)
+                ->groupBy('User.id')
                 ->get();
         }
 
