@@ -36,14 +36,12 @@ class ProcedureController extends Controller
     #Mysql Call Proc User_Insert_Proc
     public function UserInsertProc(Request $req)
     {
-
         $unitArr = $req->units;
         try
         {
             $now = new DateTime();
             foreach ($unitArr as $item) {
                 $PositionTmp = new PositionTmp;
-
                 $PositionTmp->id           = $req->email;
                 $PositionTmp->unit         = $item['unit'];
                 $PositionTmp->area         = $item['area'];
@@ -211,13 +209,34 @@ class ProcedureController extends Controller
     #Mysql Call Proc User_Update_Proc
     public function UserUpdateProc(Request $req)
     {
-        $user = UserTmp::where('id', $req->email)->first();
-        $user->password = $req->password;
-        $user->name = $req->name;
+        $user = User::where('id', $req->email)->first();
+        //$user->password     = $req->password;
+        $user->name         = $req->name;
+        $user->isEnable     = $req->isEnable;
+
+        $now = new DateTime();
+        $user->upd_user     = 'admin@gmail.com';
+        $user->upd_date     = $now->format('Ymd');
+        $user->upd_time     = $now->format('His');
+        $user->save();
+
+        $units = $req->units;
+
+        //Kill
+        $positions = Position::where('id', $req->email)->delete();
+        $position = new Position();
+
+        foreach ($units as $unitItem) {
+            $position->email    = $req->email;
+            $position->unit     = $unitItem->unit;
+            $position->area     = $unitItem->area;
+            $position->upd_date = $now->format('Ymd');
+            $position->upd_time = $now->format('His');
+            $position->save();
+        }
 
         try
         {
-            $user->save();
             return response(200)->header('Content-Type', 'application/json');
         } catch (\Throwable $th) {
             return response(json_encode($th), 404)->header('Content-Type', 'application/json');
