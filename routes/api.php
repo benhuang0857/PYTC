@@ -21,7 +21,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::post('signin', 'ProcedureController@LoginProc')->middleware('cors');
 Route::post('signup', 'ProcedureController@UserInsertProc')->middleware('cors');
 Route::post('employee', 'ProcedureController@UserSelectProc')->middleware('cors');
-Route::get('employee/get', 'ProcedureController@UserSelectOneProc')->middleware('cors');
+Route::post('employee/get', 'ProcedureController@UserSelectOneProc')->middleware('cors');
 Route::post('employee/update', 'ProcedureController@UserUpdateProc')->middleware('cors');
 
 Route::post('menu', 'ProcedureController@ListSelectProc')->middleware('cors');
