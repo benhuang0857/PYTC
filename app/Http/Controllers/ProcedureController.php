@@ -221,7 +221,7 @@ class ProcedureController extends Controller
         $user->save();
 
         $units = json_decode( $req->units );
-        dd($unit);
+        dd($units);
 
         //Kill
         $positions = Position::where('id', $req->email)->delete();
