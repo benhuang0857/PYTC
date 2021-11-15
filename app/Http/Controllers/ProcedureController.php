@@ -41,7 +41,7 @@ class ProcedureController extends Controller
         {
             $now = new DateTime();
             foreach ($unitArr as $item) {
-                $PositionTmp = new PositionTmp;
+                $PositionTmp = new Position;
                 $PositionTmp->id           = $req->email;
                 $PositionTmp->unit         = $item['unit'];
                 $PositionTmp->area         = $item['area'];
@@ -51,10 +51,11 @@ class ProcedureController extends Controller
                 $PositionTmp->save();
             }
             
-            $UserTmp = new UserTmp;
+            $UserTmp = new User;
             $UserTmp->id           = $req->email;
             $UserTmp->password     = $req->password;
             $UserTmp->name         = $req->name;
+            $UserTmp->isEnable     = $req->isEnable;
             $UserTmp->upd_user     = 'admin@gmail.com';
             $UserTmp->upd_date     = $now->format('Ymd');
             $UserTmp->upd_time     = $now->format('His');
@@ -201,6 +202,22 @@ class ProcedureController extends Controller
                 'isEnable' => $isEnabled,
                 'units' => $unitsArr
             ], JSON_UNESCAPED_UNICODE);
+        } catch (\Throwable $th) {
+            return response(json_encode($th), 404)->header('Content-Type', 'application/json');
+        }
+    }
+
+    #Mysql Call Proc User_Select_Proc One person
+    public function UserDeleteOneProc(Request $req)
+    {
+        $id = $req->email;
+        $user = DB::table('User')->where('id', $id)->first();
+        $user->isEnable = 'N'; 
+        $user->save();
+
+        try
+        {
+            return json_encode(200);
         } catch (\Throwable $th) {
             return response(json_encode($th), 404)->header('Content-Type', 'application/json');
         }
